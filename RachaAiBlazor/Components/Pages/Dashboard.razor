@@ -1,0 +1,111 @@
+@page "/dashboard"
+
+@using RachaAiBlazor.Models
+
+<div class="container mt-4">
+
+    <h1 class="fw-bold mb-4">
+        Dashboard Financeiro
+    </h1>
+
+    <!-- CARDS -->
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                    <h5>Total a Receber</h5>
+                    <h3>R$ 850,00</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-danger text-white shadow">
+                <div class="card-body">
+                    <h5>Total a Pagar</h5>
+                    <h3>R$ 420,00</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    <h5>Saldo Geral</h5>
+                    <h3>R$ 430,00</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <h3 class="mb-3">
+        Meus Grupos
+    </h3>
+
+    @foreach (var grupo in grupos)
+    {
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h5 class="fw-bold">
+                        @grupo.Nome
+                    </h5>
+
+                    <span class="badge bg-primary">
+                        @grupo.Categoria
+                    </span>
+                </div>
+
+                <div>
+                    <h5 class="@(grupo.NoVermelho ? "text-danger" : "text-success")">
+                        @grupo.ValorPendente.ToString("C")
+                    </h5>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<button class="btn btn-primary rounded-circle shadow fab">
+    +
+</button>
+
+@code {
+
+    List<Grupo> grupos = new()
+    {
+        new Grupo
+        {
+            Nome = "República",
+            Categoria = "Casa",
+            ValorPendente = 250,
+            NoVermelho = true
+        },
+
+        new Grupo
+        {
+            Nome = "Churrasco de Domingo",
+            Categoria = "Lazer",
+            ValorPendente = 120,
+            NoVermelho = false
+        },
+
+        new Grupo
+        {
+            Nome = "Viagem BH",
+            Categoria = "Viagem",
+            ValorPendente = 300,
+            NoVermelho = true
+        }
+    };
+
+}
+
+}
